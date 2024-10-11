@@ -1,0 +1,104 @@
+<div class="login-container">
+  <!-- Login Form -->
+  <form *ngIf="!isSignup" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <h2>Login</h2>
+
+    <div *ngIf="loginError" class="alert alert-danger error">
+      {{ loginError }}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        class="form-control"
+      />
+      <div *ngIf="submitted && loginForm.controls['email'].errors" class="error">
+        <small *ngIf="loginForm.controls['email'].errors['required']">Email is required</small>
+        <small *ngIf="loginForm.controls['email'].errors['email']">Invalid email format</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        class="form-control"
+      />
+      <div *ngIf="submitted && loginForm.controls['password'].errors" class="error">
+        <small *ngIf="loginForm.controls['password'].errors['required']">Password is required</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+    <button (click)="toggleForm()" class="btn btn-secondary">
+      {{ isSignup ? 'Back to Login' : 'Create Account' }}
+    </button>
+  </form>
+
+  <!-- Signup Form -->
+  <form *ngIf="isSignup" [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+    <h2>Signup</h2>
+
+    <div *ngIf="signupError" class="alert alert-danger error">
+      {{ signupError }}
+    </div>
+
+    <div class="form-group">
+      <label for="signupEmail">Email</label>
+      <input
+        type="email"
+        id="signupEmail"
+        formControlName="email"
+        placeholder="Enter your email"
+        class="form-control"
+      />
+      <div *ngIf="submitted && signupForm.controls['email'].errors" class="error">
+        <small *ngIf="signupForm.controls['email'].errors['required']">Email is required</small>
+        <small *ngIf="signupForm.controls['email'].errors['email']">Invalid email format</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="signupPassword">Password</label>
+      <input
+        type="password"
+        id="signupPassword"
+        formControlName="password"
+        placeholder="Enter your password"
+        class="form-control"
+      />
+      <div *ngIf="submitted && signupForm.controls['password'].errors" class="error">
+        <small *ngIf="signupForm.controls['password'].errors['required']">Password is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        placeholder="Confirm your password"
+        class="form-control"
+      />
+      <div *ngIf="submitted && signupForm.controls['confirmPassword'].errors" class="error">
+        <small *ngIf="signupForm.controls['confirmPassword'].errors['required']">Confirm Password is required</small>
+      </div>
+      <div *ngIf="submitted && signupForm.errors?.['mismatch']" class="error"> <!-- Change here -->
+        <small>Passwords do not match.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <button (click)="toggleForm()" class="btn btn-secondary">
+      {{ isSignup ? 'Back to Login' : 'Create Account' }}
+    </button>
+  </form>
+</div>

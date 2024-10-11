@@ -1,0 +1,115 @@
+h2 {
+  color: #2c3e50;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #2980b9;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+form {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+small {
+  color: red;
+}
+
+/*Categories list*/
+
+/* Targeting the ng-select elements */
+::ng-deep ng-select {
+  width: 100%;
+  margin-top: 5px;
+}
+
+::ng-deep .ng-select-container {
+  background-color: white !important; /* Solid background */
+  border: 1px solid #ced4da !important; /* Border similar to input fields */
+  border-radius: 0.25rem; /* Rounded corners */
+  min-height: 38px !important; /* Adjust the height */
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container {
+  box-shadow: none; /* Remove shadow */
+}
+
+::ng-deep .ng-select.ng-select-single .ng-select-container .ng-value-container {
+  padding: 0.375rem 0.75rem; /* Padding to match other form controls */
+}
+
+::ng-deep .ng-dropdown-panel {
+  background-color: white !important; /* Set dropdown background */
+  border: 1px solid #ced4da !important; /* Border similar to the select box */
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 250px; /* Limit dropdown height */
+  overflow-y: auto; /* Scroll if items exceed height */
+}
+
+::ng-deep .ng-option {
+  padding: 0.5rem; /* Padding for each dropdown option */
+  color: #495057 !important; /* Text color */
+}
+
+::ng-deep .ng-option:hover {
+  background-color: #f8f9fa !important; /* Hover effect for options */
+}
+
+::ng-deep .ng-option-selected {
+  background-color: #007bff !important; /* Background for selected option */
+  color: white !important; /* White text for selected option */
+}
+
+/* Focus state styling */
+::ng-deep .ng-select.ng-select-single .ng-select-container:focus {
+  border-color: #80bdff !important; /* Border color on focus */
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important; /* Blue outline shadow */
+}
+
+/*Delete button*/
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.over-budget {
+  color: red;
+}

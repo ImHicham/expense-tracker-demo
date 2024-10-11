@@ -1,0 +1,25 @@
+<!-- app.component.html -->
+<div class="app-container">
+  <nav>
+      <ul>
+          <!-- Back Button -->
+          <li *ngIf="canGoBack" class="nav-button">
+              <a (click)="goBack()">Back</a>
+          </li>
+
+          <li class="spacer"></li> <!-- Spacer to push Login to the right -->
+
+          <!-- Login Option -->
+          <li *ngIf="!isLoggedIn">
+              <a routerLink="/login">Login</a>
+          </li>
+          <li *ngIf="isLoggedIn">
+              <a (click)="logout()">Logout</a>
+          </li>
+      </ul>
+  </nav>
+
+  <div class="content">
+      <router-outlet></router-outlet>
+  </div>
+</div>

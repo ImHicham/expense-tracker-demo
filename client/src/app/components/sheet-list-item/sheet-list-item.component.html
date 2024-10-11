@@ -1,0 +1,62 @@
+<div class="sheet-list-container">
+  <!-- Button to show the form -->
+  <button (click)="toggleForm()" class="btn btn-primary">
+    {{ isFormVisible ? 'Cancel' : 'Create Sheet' }}
+  </button>
+
+  <!-- Form to create a new sheet -->
+  <div *ngIf="isFormVisible" class="new-sheet-form">
+    <h2>Create New Sheet</h2>
+    <form #newSheetForm="ngForm" (ngSubmit)="onCreateSheet();">
+      <div>
+        <label for="name">Sheet Name</label>
+        <input
+          type="text"
+          id="name"
+          required
+          [(ngModel)]="newSheet.name"
+          name="name"
+        />
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          [(ngModel)]="newSheet.description"
+          name="description"
+        ></textarea>
+      </div>
+      <div>
+        <label for="maxBudget">Max Budget</label>
+        <input
+          type="number"
+          id="maxBudget"
+          required
+          [(ngModel)]="newSheet.maxBudget"
+          name="maxBudget"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Create Sheet</button> <!-- Change button type to submit -->
+    </form>
+  </div>
+
+  <div *ngIf="sheetList && sheetList.length > 0; else noSheets">
+    <ul>
+      <li *ngFor="let sheet of sheetList">
+        <a [routerLink]="['/sheet', sheet.id]">
+          <h3>{{ sheet.name }}</h3>
+        </a>
+        <p><strong>Description:</strong> {{ sheet.description }}</p>
+        <p><strong>Max Budget:</strong> {{ sheet.maxBudget | currency }}</p>
+        <p><strong>Creation Date:</strong> {{ sheet.creationDate | date:'long' }}</p>
+        <button (click)="onDeleteSheet(sheet.id)" class="btn btn-danger">Delete</button> <!-- Delete button -->
+        <hr />
+      </li>
+    </ul>
+  </div>
+
+  <!-- Fallback for no sheets -->
+  <ng-template #noSheets>
+    <p>No sheets available.</p>
+  </ng-template>
+</div>

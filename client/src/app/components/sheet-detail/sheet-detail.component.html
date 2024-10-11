@@ -1,0 +1,100 @@
+<div *ngIf="sheet">
+  <h2>{{ sheet.name }}</h2>
+  <p><strong>Description:</strong> {{ sheet.description }}</p>
+  <p><strong>Max Budget:</strong> {{ sheet.maxBudget | currency }}</p>
+  <p><strong>Creation Date:</strong> {{ sheet.creationDate | date:'long' }}</p>
+  <!-- Total amount spent -->
+  <p 
+    [ngClass]="{'over-budget': getTotalSpent() > sheet.maxBudget}">
+    <strong>Total Spent:</strong> {{ getTotalSpent() | currency }}
+  </p>
+</div>
+
+<div *ngIf="!sheet">
+  <p>Loading sheet details...</p>
+</div>
+
+<!-- Displaying the list of expenses -->
+<div *ngIf="sheetExpenses && sheetExpenses.length > 0">
+  <h3>Expenses</h3>
+  <ul>
+    <li *ngFor="let expense of sheetExpenses; let i = index">
+      <h4>{{ expense.name }}</h4>
+      <p><strong>Amount:</strong> {{ expense.amount | currency }}</p>
+      <p><strong>Expected:</strong> {{ expense.expected | currency }}</p>
+      <p><strong>Category:</strong> {{ expense.categoryName }}</p>
+      <p><strong>Created at:</strong> {{ expense.createdAt }}</p>
+      
+      <!-- Delete button -->
+      <button (click)="deleteExpense(expense.id, i)" class="btn btn-danger">
+        Delete
+      </button>
+      
+      <hr />
+    </li>
+  </ul>
+</div>
+
+
+<!-- Fallback for no expenses -->
+<div *ngIf="sheetExpenses.length === 0 && sheet">
+  <p>No expenses found for this sheet.</p>
+</div>
+
+<!-- Button to show/hide the add expense form -->
+<button (click)="toggleAddExpenseForm()">
+  {{ showAddExpenseForm ? 'Cancel' : 'Add Expense' }}
+</button>
+
+<!-- Add Expense Form -->
+<div *ngIf="showAddExpenseForm">
+  <h3>Add New Expense</h3>
+  <form [formGroup]="expenseForm" (ngSubmit)="addExpense()">
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" required />
+      <div *ngIf="expenseForm.get('name')?.invalid || expenseForm.get('name')?.dirty">
+        <small *ngIf="expenseForm.get('name')?.errors?.['required']">Name is required.</small>
+        <small *ngIf="expenseForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters long.</small>
+        <small *ngIf="expenseForm.get('name')?.errors?.['maxlength']">Name must not exceed 200 characters.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="amount">Amount:</label>
+      <input id="amount" formControlName="amount" required />
+      <div *ngIf="expenseForm.get('amount')?.invalid || expenseForm.get('amount')?.dirty">
+        <small *ngIf="expenseForm.get('amount')?.errors?.['required']">Amount is required.</small>
+        <small *ngIf="expenseForm.get('amount')?.errors?.['pattern']">Must be a valid decimal number.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="expected">Expected:</label>
+      <input id="expected" formControlName="expected" />
+      <div *ngIf="expenseForm.get('expected')?.invalid  || expenseForm.get('expected')?.dirty">
+        <small *ngIf="expenseForm.get('expected')?.errors?.['required']">Expected is required.</small>
+        <small *ngIf="expenseForm.get('expected')?.errors?.['pattern']">Must be a valid decimal number.</small>
+      </div>
+    </div>
+
+<!-- Category select with addTag option -->
+<div class="form-group">
+  <label for="category">Category</label>
+  <ng-select
+    [items]="categories"
+    bindLabel="name"
+    bindValue="id"
+    formControlName="category_id"
+    [addTag]="addCategory.bind(this)"
+    [searchable]="true"
+    [clearable]="true"
+  >
+  </ng-select>
+</div>
+
+  
+
+    <button type="submit" [disabled]="expenseForm.invalid">Add Expense</button>
+  </form>
+</div>

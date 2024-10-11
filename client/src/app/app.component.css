@@ -1,0 +1,58 @@
+/* styles.css or your specific component CSS */
+
+body {
+  margin: 0; /* Remove default margin */
+  height: 100vh; /* Full height */
+}
+
+.app-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack nav and content vertically */
+  height: 100%; /* Full height */
+}
+
+nav {
+  background-color: #333; /* Example background color */
+  color: white; /* Example text color */
+  padding: 10px; /* Padding for the navigation bar */
+  width: 100%; /* Full width */
+}
+
+nav ul {
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  display: flex; /* Display items in a row */
+  align-items: center; /* Center items vertically */
+}
+
+nav ul li {
+  margin-right: 20px; /* Space between navigation items horizontally */
+}
+
+nav ul li:last-child {
+  margin-right: 0; /* Remove margin from the last item */
+}
+
+nav ul li a,
+nav ul li .nav-button button {
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make the link inline-block */
+  padding: 10px 15px; /* Add padding for links and buttons */
+  transition: background 0.3s; /* Transition for hover effect */
+}
+
+nav ul li a:hover,
+nav ul li .nav-button button:hover {
+  background: rgba(255, 255, 255, 0.2); /* Hover effect */
+}
+
+.spacer {
+  flex-grow: 1; /* This pushes the Login option to the right */
+}
+
+.content {
+  flex: 1; /* Take the remaining space */
+  padding: 20px; /* Add padding for content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}

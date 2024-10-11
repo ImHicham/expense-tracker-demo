@@ -1,0 +1,14 @@
+FROM node:18
+
+WORKDIR /usr/src/app
+
+COPY . .
+COPY client ./client
+
+RUN npm cache clean --force --loglevel=error && npm install
+
+EXPOSE 8080
+
+RUN ls -al /usr/src/app
+
+CMD ["/bin/bash","-c","chmod +x ./entrypoint.dev.sh && ./entrypoint.dev.sh"]
